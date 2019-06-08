@@ -5,7 +5,7 @@ var T = new Twit(config);
 
 // THIS METHOD GET A LIST OF FIRST 50 TRENDS MATCHED
 // AND CALL TO GOT DATA
-function GetTopTen(array){
+function GetTopTen(){
     var params = {
         id: '23424747'
     }
@@ -23,7 +23,7 @@ function gotData(err, data, response) {
         for(var item in trends){
             topNames.push(trends[item].name);
         }
-        topNames.splice(5);
+        topNames.splice(1);
         resultParams=[];
         topNames.forEach(function (element){
             var params1 = {
@@ -46,11 +46,27 @@ function serchTweets (params){
 // ***************
 function serchTwit(err,data,response){
     if(err){
-        return console.log("Error when we are trying to serch tweets: ", err);
-    }else{
-
-
+        console.log("Error en serchTwit: " + err);
+    }
+    else{
+        if(!data.statuses[0]){
+            var request = {
+                "status": false
+            }
+        }else{
+            var text = data.statuses[0].text;
+            var created_at = data.statuses[0].created_at;
+            var name = data.statuses[0].user.name;
+            var request = {
+                "text": text,
+                "date": created_at,
+                "name": name,
+                "status": true
+            }
+            // llamar otra function pero estoy dentro del loop
+            //console.log(data.statuses[0]);
+        }
+        console.log(JSON.stringify(request));
     }
 }
-
 GetTopTen();

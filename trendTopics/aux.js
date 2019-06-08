@@ -41,7 +41,7 @@ var pushParam = function (element){
     resultParams.push(params1);
 }
 var serch = function(params){
-    params.forEach(searchTweets);
+    params.forEach(returnTweets);
 }
 var getTweets = function (param){
     T.get('search/tweets',param,returnTweets)
@@ -65,6 +65,7 @@ var send = function (data){
         }
 
     // llamar otra function pero estoy dentro del loop
+    console.log(json);
     }
 }
 
